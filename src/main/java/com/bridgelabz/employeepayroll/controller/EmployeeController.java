@@ -1,13 +1,18 @@
 package com.bridgelabz.employeepayroll.controller;
 
+import com.bridgelabz.employeepayroll.dto.EmployeeDTO;
+import com.bridgelabz.employeepayroll.model.Employee;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
+
 
     @RestController
     @RequestMapping("/employees")
     public class EmployeeController {
+        private List<EmployeeDTO> employeeDTOList = new ArrayList<>();
+
 
         private Map<Integer, String> employees = new HashMap<>();
 
@@ -38,4 +43,25 @@ import java.util.Map;
             }
             return "Employee not found!";
         }
-    }
+
+
+        // ========== DTO Handling (First) ==========
+
+        @PostMapping("/dto")
+        public ResponseEntity<String> createEmployeeDTO(@RequestBody EmployeeDTO employeeDTO) {
+            employeeDTOList.add(employeeDTO);
+            return ResponseEntity.ok("Employee added using DTO: " + employeeDTO.getName() + ", Salary: " + employeeDTO.getSalary());
+        }
+
+        @GetMapping("/dto/sample")
+        public EmployeeDTO getSampleEmployeeDTO() {
+            return new EmployeeDTO("Sample Employee", 50000.0);
+        }
+
+        @GetMapping("/dto/all")
+        public List<EmployeeDTO> getAllEmployeesDTO() {
+            return employeeDTOList;
+        }
+
+       }
+

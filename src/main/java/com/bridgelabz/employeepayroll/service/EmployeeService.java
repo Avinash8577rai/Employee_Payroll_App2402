@@ -64,4 +64,26 @@ import java.util.List;
         public boolean deleteEmployee(int id) {
             return employeeList.removeIf(emp -> emp.getId() == id);
         }
+
+        // ✅ Add EmployeeDTO to the in-memory list
+        public EmployeeDTO addEmployeesDTO(EmployeeDTO employeeDTO) {
+            employeeDTOList.add(employeeDTO);
+            return employeeDTO;
+        }
+
+        // ✅ Get all EmployeeDTOs from the list
+        public List<EmployeeDTO> getAllEmployeeDTOs() {
+            return employeeDTOList;
+        }
+
+        // ✅ Add Employee entity to the in-memory list (Simulating DB storage)
+        public Employee addEmployees(Employee employee) {
+            employeeList.add(employee);
+            return employee;
+        }
+
+        // ✅ Get all Employees from the list
+        public List<Employee> getAllEmployees() {
+            return employeeList;
+        }
     }
